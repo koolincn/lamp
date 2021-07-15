@@ -4,10 +4,10 @@
  </head>
  <body>
  </br>
-  <a href=http://{{ ansible_default_ipv4.address }}/index.html>Homepage</a>
+  <a href=http://169.47.107.178/index.html>Homepage</a>
  </br>
  </br>
-  <a href=http://{{ ansible_default_ipv4.address }}/about.html>About Us</a>
+  <a href=http://169.47.107.178/about.html>About Us</a>
  </br>
 <?php 
  Print "Hello, World! I am a web server configured using Ansible and I am : ";
@@ -16,7 +16,7 @@
 echo  "List of Databases: </BR>";
         {% for key, value in groups.items() %}  
     {% for host in groups[key] %}
-                $link = mysqli_connect('{{ hostvars[host].ansible_default_ipv4.address }}', '{{ hostvars[host].dbuser }}', '{{ hostvars[host].upassword }}') or die(mysqli_connect_error($link));
+                $link = mysqli_connect('169.47.107.178', '{{ hostvars[host].dbuser }}', '{{ hostvars[host].upassword }}') or die(mysqli_connect_error($link));
     {% endfor %}
 {% endfor %}
         $res = mysqli_query($link, "SHOW DATABASES;");
