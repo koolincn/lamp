@@ -1,0 +1,33 @@
+---
+# This playbook deploys the LAMP application stack in this site.
+
+
+
+
+- name: deploy and configure the webservers and application
+  hosts: webserver
+  remote_user: root
+
+  roles:
+    - web
+
+- name: deploy MySQL and configure the databases
+  hosts: dbserver
+  remote_user: root
+
+  roles:
+    - db
+
+- name: Verify Installation
+  hosts: webserver
+  tasks:
+
+    - name: Query index page for application
+      uri:
+        url: http://localhost/index.php
+        return_content: yes
+      register: Output
+    
+    - name: Display Index page content
+      ansible.builtin.debug:
+        var: Output
